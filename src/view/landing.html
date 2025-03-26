@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swapping - Tienda electrónica</title>
+    <link rel="stylesheet" href="/src/styles/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-menu">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="#" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow arrow-left"></div>
+                        <div class="arrow arrow-right"></div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <select class="category-select">
+                        <option>Categoría...</option>
+                    </select>
+                    <input type="text" placeholder="Search Product here">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <a href="#" class="register-link">Registrarse</a>
+                <a href="/src/view/login.html" class="login-btn">Iniciar Sesión</a>
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li class="active"><a href="src\view\landing.html">Inicio</a></li>
+            <li><a href="#">Catálogos</a></li>
+            <li><a href="#">Computadoras <span class="new-badge">NEW</span></a></li>
+            <li><a href="#">Tablets</a></li>
+            <li><a href="#">Relojes</a></li>
+            <li><a href="#">Más</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1>Encuentra lo mejor en<br>productos electrónicos</h1>
+            <a href="#" class="explore-btn">Explora <i class="fas fa-arrow-right"></i></a>
+            
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zWl22OVhgwfE39Gs9QfoGCO0ixh7oF.png" alt="Dispositivos electrónicos" class="hidden-img">
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="section-header">
+            <h2>Lo más destacado en Celulares</h2>
+            <a href="#" class="view-all">Ver Todo »</a>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=200&width=150" alt="Galaxy S22 Ultra">
+                </div>
+                <h3>Galaxy S22 Ultra</h3>
+                <p class="price">Precio: <span>L. 9,440</span></p>
+                <a href="#" class="details-btn">Ver más detalles</a>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M13 (4GB | 64 GB)">
+                </div>
+                <h3>Galaxy M13 (4GB | 64 GB)</h3>
+                <p class="price">Precio: <span>L. 14,940</span></p>
+                <a href="#" class="details-btn">Ver más detalles</a>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M33 (4GB | 64 GB)">
+                </div>
+                <h3>Galaxy M33 (4GB | 64 GB)</h3>
+                <p class="price">Precio: <span>L. 14,940</span></p>
+                <a href="#" class="details-btn">Ver más detalles</a>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M53 (4GB | 64 GB)">
+                </div>
+                <h3>Galaxy M53 (4GB | 64 GB)</h3>
+                <p class="price">Precio: <span>L. 14,940</span></p>
+                <a href="#" class="details-btn">Ver más detalles</a>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=200&width=150" alt="Galaxy S22 Ultra">
+                </div>
+                <h3>Galaxy S22 Ultra</h3>
+                <p class="price">Precio: <span>L. 14,940</span></p>
+                <a href="#" class="details-btn">Ver más detalles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow arrow-left"></div>
+                        <div class="arrow arrow-right"></div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Inicio</a>
+                <a href="#">Productos</a>
+                <a href="#">Blog</a>
+                <a href="#">Ayuda</a>
+                <a href="#">Acerca de</a>
+            </div>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <div class="footer-bottom">
+            <p>Grupo Axelite 2024</p>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/landing.js"></script>
+</body>
+</html>
