@@ -3,42 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swapping - Productos Electrónicos</title>
-    <link rel="stylesheet" href="/src/styles/catalogoProductos.css">
+    <title>Swapping - Tienda electrónica</title>
+    <link rel="stylesheet" href="/src/styles/landing.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="left-section">
-                <button class="menu-toggle">
+            <div class="logo-menu">
+                <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a href="#" class="logo">
+                <a href="/src/view/landing.html" class="logo">
                     <span class="logo-text">SWAPPING</span>
                     <div class="logo-icon">
-                        <div class="arrow-left"></div>
-                        <div class="arrow-right"></div>
+                        <div class="arrow arrow-left"></div>
+                        <div class="arrow arrow-right"></div>
                     </div>
                 </a>
             </div>
             
             <div class="search-container">
                 <div class="search-box">
-                    <div class="category-select">
-                        Categoría <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <input type="text" placeholder="Search Product Here">
+                    <select class="category-select">
+                        <option disabled selected>Categoría...</option>
+                    </select>
+                    <input type="text" placeholder="Search Product here">
                     <button class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
             
-            <div class="right-section">
+            <div class="user-actions">
                 <a href="#" class="register-link">Registrarse</a>
-                <a href="#" class="login-btn">Iniciar Sesión</a>
+                <a href="/src/view/login.html" class="login-btn">Iniciar Sesión</a>
                 <a href="#" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -49,244 +49,104 @@
 
     <!-- Navigation -->
     <nav class="main-nav">
-        <div class="nav-container">
-            <ul>
-                <li><a href="#" data-category="inicio">Inicio</a></li>
-                <li class="active"><a href="#" data-category="celulares">Celulares</a></li>
-                <li><a href="#" data-category="computadoras">Computadoras <span class="new-badge">NEW</span></a></li>
-                <li><a href="#" data-category="tablets">Tablets</a></li>
-                <li><a href="#" data-category="relojes">Relojes</a></li>
-                <li><a href="#" data-category="mas">Más</a></li>
-            </ul>
-        </div>
+        <ul>
+            <li class="active"><a href="#" data-category="inicio">Inicio</a></li>
+            <li><a href="#" data-category="catalogos">Catálogos</a></li>
+            <li><a href="#" data-category="computadoras">Computadoras <span class="new-badge">NEW</span></a></li>
+            <li><a href="#" data-category="tablets">Tablets</a></li>
+            <li><a href="#" data-category="relojes">Relojes</a></li>
+            <li><a href="#" data-category="mas">Más</a></li>
+        </ul>
     </nav>
 
-    <!-- Products Content -->
-    <main class="products-content">
-        <!-- Celulares Section -->
-        <div class="products-section active" id="celulares">
-            <div class="products-container">
-                <div class="products-header">
-                    <h1 class="products-title">Celulares Disponibles</h1>
-                    <div class="products-search">
-                        <input type="text" placeholder="Search">
-                        <button class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+    <!-- Content Sections -->
+    <div class="content-sections">
+        <!-- Inicio Section -->
+        <section class="category-section active" id="inicio-section">
+
+            <!-- Featured Products -->
+            <section class="featured-products">
+                <div class="section-header">
+                    <h2>Lo más destacado en Celulares</h2>
+                    <a href="#" class="view-all">Ver Todo »</a>
                 </div>
                 
-                <div class="products-grid">
-                    <!-- Row 1 -->
+                <div class="product-grid">
                     <!-- Product 1 -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
+                            <img src="/placeholder.svg?height=200&width=150" alt="Galaxy S22 Ultra">
                         </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Galaxy S22 Ultra</h3>
+                        <p class="price">Precio: <span>L. 9,440</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Product 2 -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy S22 Ultra">
+                            <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M13 (4GB | 64 GB)">
                         </div>
-                        <div class="product-info">
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Galaxy M13 (4GB | 64 GB)</h3>
+                        <p class="price">Precio: <span>L. 14,940</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Product 3 -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
+                            <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M33 (4GB | 64 GB)">
                         </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Galaxy M33 (4GB | 64 GB)</h3>
+                        <p class="price">Precio: <span>L. 14,940</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Product 4 -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M33">
+                            <img src="/placeholder.svg?height=200&width=150" alt="Galaxy M53 (4GB | 64 GB)">
                         </div>
-                        <div class="product-info">
-                            <h3>Galaxy M33 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Galaxy M53 (4GB | 64 GB)</h3>
+                        <p class="price">Precio: <span>L. 14,940</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Product 5 -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
+                            <img src="/placeholder.svg?height=200&width=150" alt="Galaxy S22 Ultra">
                         </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Row 2 -->
-                    <!-- Product 6 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 7 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy S22 Ultra">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 8 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy S22 Ultra">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 9 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M33">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M33 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 10 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Row 3 -->
-                    <!-- Product 11 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 12 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy S22 Ultra">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 13 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy S22 Ultra">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 14 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M33">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M33 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 15 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=100" alt="Galaxy M53">
-                        </div>
-                        <div class="product-info">
-                            <h3>Galaxy M53 (4GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L. 15420</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Galaxy S22 Ultra</h3>
+                        <p class="price">Precio: <span>L. 14,940</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        
+            </section>
+        </section>
+
         <!-- Computadoras Section -->
-        <div class="products-section" id="computadoras">
-            <div class="products-container">
-                <div class="products-header">
-                    <h1 class="products-title">Computadoras Disponibles</h1>
-                    <div class="products-search">
-                        <input type="text" placeholder="Search">
+        <section class="category-section" id="computadoras-section">
+            <div class="category-container">
+                <div class="section-header">
+                    <h2>Computadoras Disponibles</h2>
+                    <div class="category-search">
+                        <input type="text" placeholder="Buscar computadoras">
                         <button class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="products-grid">
+                <div class="product-grid">
                     <!-- Laptop 1 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=200" alt="MacBook Pro">
                         </div>
-                        <div class="product-info">
-                            <h3>MacBook Pro 13" (M2, 8GB, 256GB)</h3>
-                            <p class="price">Precio: <span>L. 32500</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>MacBook Pro 13" (M2, 8GB, 256GB)</h3>
+                        <p class="price">Precio: <span>L. 32,500</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Laptop 2 -->
@@ -294,11 +154,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=200" alt="Dell XPS 13">
                         </div>
-                        <div class="product-info">
-                            <h3>Dell XPS 13 (i7, 16GB, 512GB)</h3>
-                            <p class="price">Precio: <span>L. 28750</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Dell XPS 13 (i7, 16GB, 512GB)</h3>
+                        <p class="price">Precio: <span>L. 28,750</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Laptop 3 -->
@@ -306,11 +164,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=200" alt="HP Spectre x360">
                         </div>
-                        <div class="product-info">
-                            <h3>HP Spectre x360 (i5, 8GB, 512GB)</h3>
-                            <p class="price">Precio: <span>L. 24600</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>HP Spectre x360 (i5, 8GB, 512GB)</h3>
+                        <p class="price">Precio: <span>L. 24,600</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Laptop 4 -->
@@ -318,23 +174,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=200" alt="Lenovo ThinkPad X1">
                         </div>
-                        <div class="product-info">
-                            <h3>Lenovo ThinkPad X1 (i7, 16GB, 1TB)</h3>
-                            <p class="price">Precio: <span>L. 29800</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Laptop 5 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=200" alt="ASUS ROG Zephyrus">
-                        </div>
-                        <div class="product-info">
-                            <h3>ASUS ROG Zephyrus (Ryzen 9, 32GB, 1TB)</h3>
-                            <p class="price">Precio: <span>L. 35200</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Lenovo ThinkPad X1 (i7, 16GB, 1TB)</h3>
+                        <p class="price">Precio: <span>L. 29,800</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Desktop 1 -->
@@ -342,88 +184,36 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=200" alt="iMac 24">
                         </div>
-                        <div class="product-info">
-                            <h3>iMac 24" (M1, 8GB, 256GB)</h3>
-                            <p class="price">Precio: <span>L. 29900</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop 2 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=200" alt="HP Pavilion Desktop">
-                        </div>
-                        <div class="product-info">
-                            <h3>HP Pavilion Desktop (i5, 16GB, 512GB)</h3>
-                            <p class="price">Precio: <span>L. 18500</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop 3 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=200" alt="Dell Inspiron Desktop">
-                        </div>
-                        <div class="product-info">
-                            <h3>Dell Inspiron Desktop (i7, 16GB, 1TB)</h3>
-                            <p class="price">Precio: <span>L. 22400</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop 4 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=200" alt="Alienware Aurora R13">
-                        </div>
-                        <div class="product-info">
-                            <h3>Alienware Aurora R13 (i9, 32GB, 2TB)</h3>
-                            <p class="price">Precio: <span>L. 42800</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop 5 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/placeholder.svg?height=200&width=200" alt="Mac Mini">
-                        </div>
-                        <div class="product-info">
-                            <h3>Mac Mini (M2, 8GB, 512GB)</h3>
-                            <p class="price">Precio: <span>L. 19500</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>iMac 24" (M1, 8GB, 256GB)</h3>
+                        <p class="price">Precio: <span>L. 29,900</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </section>
+
         <!-- Tablets Section -->
-        <div class="products-section" id="tablets">
-            <div class="products-container">
-                <div class="products-header">
-                    <h1 class="products-title">Tablets Disponibles</h1>
-                    <div class="products-search">
-                        <input type="text" placeholder="Search">
+        <section class="category-section" id="tablets-section">
+            <div class="category-container">
+                <div class="section-header">
+                    <h2>Tablets Disponibles</h2>
+                    <div class="category-search">
+                        <input type="text" placeholder="Buscar tablets">
                         <button class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="products-grid">
+                <div class="product-grid">
                     <!-- Tablet 1 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="iPad Pro">
                         </div>
-                        <div class="product-info">
-                            <h3>iPad Pro 12.9" (M2, 256GB, WiFi)</h3>
-                            <p class="price">Precio: <span>L. 24500</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>iPad Pro 12.9" (M2, 256GB, WiFi)</h3>
+                        <p class="price">Precio: <span>L. 24,500</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Tablet 2 -->
@@ -431,11 +221,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Samsung Galaxy Tab S8">
                         </div>
-                        <div class="product-info">
-                            <h3>Samsung Galaxy Tab S8 (8GB, 128GB)</h3>
-                            <p class="price">Precio: <span>L. 18200</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Samsung Galaxy Tab S8 (8GB, 128GB)</h3>
+                        <p class="price">Precio: <span>L. 18,200</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Tablet 3 -->
@@ -443,11 +231,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Microsoft Surface Pro 9">
                         </div>
-                        <div class="product-info">
-                            <h3>Microsoft Surface Pro 9 (i5, 8GB, 256GB)</h3>
-                            <p class="price">Precio: <span>L. 22800</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Microsoft Surface Pro 9 (i5, 8GB, 256GB)</h3>
+                        <p class="price">Precio: <span>L. 22,800</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Tablet 4 -->
@@ -455,11 +241,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Lenovo Tab P12 Pro">
                         </div>
-                        <div class="product-info">
-                            <h3>Lenovo Tab P12 Pro (6GB, 128GB)</h3>
-                            <p class="price">Precio: <span>L. 15600</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Lenovo Tab P12 Pro (6GB, 128GB)</h3>
+                        <p class="price">Precio: <span>L. 15,600</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Tablet 5 -->
@@ -467,40 +251,36 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Amazon Fire HD 10">
                         </div>
-                        <div class="product-info">
-                            <h3>Amazon Fire HD 10 (3GB, 64GB)</h3>
-                            <p class="price">Precio: <span>L. 5800</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Amazon Fire HD 10 (3GB, 64GB)</h3>
+                        <p class="price">Precio: <span>L. 5,800</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </section>
+
         <!-- Relojes Section -->
-        <div class="products-section" id="relojes">
-            <div class="products-container">
-                <div class="products-header">
-                    <h1 class="products-title">Relojes Inteligentes</h1>
-                    <div class="products-search">
-                        <input type="text" placeholder="Search">
+        <section class="category-section" id="relojes-section">
+            <div class="category-container">
+                <div class="section-header">
+                    <h2>Relojes Inteligentes</h2>
+                    <div class="category-search">
+                        <input type="text" placeholder="Buscar relojes">
                         <button class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="products-grid">
+                <div class="product-grid">
                     <!-- Reloj 1 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Apple Watch Series 8">
                         </div>
-                        <div class="product-info">
-                            <h3>Apple Watch Series 8 (GPS, 45mm)</h3>
-                            <p class="price">Precio: <span>L. 9800</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Apple Watch Series 8 (GPS, 45mm)</h3>
+                        <p class="price">Precio: <span>L. 9,800</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Reloj 2 -->
@@ -508,11 +288,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Samsung Galaxy Watch 5">
                         </div>
-                        <div class="product-info">
-                            <h3>Samsung Galaxy Watch 5 (44mm)</h3>
-                            <p class="price">Precio: <span>L. 7500</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Samsung Galaxy Watch 5 (44mm)</h3>
+                        <p class="price">Precio: <span>L. 7,500</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Reloj 3 -->
@@ -520,11 +298,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Garmin Fenix 7">
                         </div>
-                        <div class="product-info">
-                            <h3>Garmin Fenix 7 Sapphire Solar</h3>
-                            <p class="price">Precio: <span>L. 18200</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Garmin Fenix 7 Sapphire Solar</h3>
+                        <p class="price">Precio: <span>L. 18,200</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Reloj 4 -->
@@ -532,11 +308,9 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Fitbit Sense 2">
                         </div>
-                        <div class="product-info">
-                            <h3>Fitbit Sense 2</h3>
-                            <p class="price">Precio: <span>L. 6400</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Fitbit Sense 2</h3>
+                        <p class="price">Precio: <span>L. 6,400</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                     
                     <!-- Reloj 5 -->
@@ -544,52 +318,47 @@
                         <div class="product-image">
                             <img src="/placeholder.svg?height=200&width=150" alt="Amazfit GTR 4">
                         </div>
-                        <div class="product-info">
-                            <h3>Amazfit GTR 4</h3>
-                            <p class="price">Precio: <span>L. 4200</span></p>
-                            <a href="#" class="details-btn">Ver detalles</a>
-                        </div>
+                        <h3>Amazfit GTR 4</h3>
+                        <p class="price">Precio: <span>L. 4,200</span></p>
+                        <a href="#" class="details-btn">Ver más detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-logo">
-                    <a href="#" class="logo">
-                        <span class="logo-text">SWAPPING</span>
-                        <div class="logo-icon">
-                            <div class="arrow-left"></div>
-                            <div class="arrow-right"></div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="#">Inicio</a>
-                    <a href="#">Productos <i class="fas fa-chevron-down"></i></a>
-                    <a href="#">Blog</a>
-                    <a href="#">Ayuda</a>
-                    <a href="#">Acerca de</a>
-                </div>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow arrow-left"></div>
+                        <div class="arrow arrow-right"></div>
+                    </div>
+                </a>
             </div>
             
-            <div class="footer-divider"></div>
+            <div class="footer-links">
+                <a href="#">Inicio</a>
+                <a href="#">Productos</a>
+                <a href="#">Blog</a>
+                <a href="#">Ayuda</a>
+                <a href="#">Acerca de</a>
+            </div>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <div class="footer-bottom">
+            <p>Grupo Axelite 2024</p>
             
-            <div class="footer-bottom">
-                <p>Grupo Axelite 2024</p>
-                
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </footer>

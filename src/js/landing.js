@@ -234,13 +234,6 @@ function generateProductsHTML(productos) {
             ? producto.fotos[0].url 
             : '/placeholder.svg?height=200&width=150';
         
-        // Formatear el precio con separadores de miles
-        const precioFormateado = new Intl.NumberFormat('es-HN', {
-            style: 'currency',
-            currency: 'HNL',
-            minimumFractionDigits: 0
-        }).format(producto.precio).replace('HNL', 'L.');
-        
         // Generar información adicional del producto
         let infoAdicional = '';
         if (producto.almacenamiento && producto.almacenamiento.tamanioalmacenamiento) {
@@ -250,32 +243,19 @@ function generateProductsHTML(productos) {
             infoAdicional += `| ${producto.color.nombre}`;
         }
         
-        // Determinar si el producto está en oferta (ejemplo: 20% de probabilidad)
-        const enOferta = Math.random() < 0.2;
-        const precioOriginal = enOferta ? 
-            new Intl.NumberFormat('es-HN', {
-                style: 'currency',
-                currency: 'HNL',
-                minimumFractionDigits: 0
-            }).format(producto.precio * 1.2).replace('HNL', 'L.') : '';
-        
         return `
             <div class="product-card" data-id="${producto.idproducto}">
                 <div class="product-image">
                     <img src="${fotoUrl}" alt="${producto.nombre}">
-                    ${enOferta ? '<span class="discount-badge">-20%</span>' : ''}
                 </div>
                 <h3>${producto.nombre}</h3>
                 ${infoAdicional ? `<p class="product-info">${infoAdicional}</p>` : ''}
-                <p class="price">
-                    ${enOferta ? `<span class="original-price">${precioOriginal}</span>` : ''}
-                    Precio: <span>${precioFormateado}</span>
-                </p>
                 <a href="#" class="details-btn" data-id="${producto.idproducto}">Ver más detalles</a>
             </div>
         `;
     }).join('');
 }
+
 
 // Función para actualizar los productos destacados en la página de inicio
 function updateFeaturedProducts(categorias) {
@@ -407,12 +387,11 @@ function setupDetailsButtons() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('details-btn')) {
             e.preventDefault();
-            const productId = e.target.getAttribute('data-id');
-            const productName = e.target.closest('.product-card').querySelector('h3').textContent;
-            alert(`Ver detalles de: ${productName} (ID: ${productId})`);
+            window.location.href = '/src/view/login.html';
         }
     });
 }
+
 
 // Función para configurar el menú móvil
 function setupMobileMenu() {
