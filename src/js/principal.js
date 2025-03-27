@@ -1,5 +1,5 @@
 document.getElementById('cargarDatos').addEventListener('click', () => {
-    fetch('http://localhost:8081/api/categorias/obtenerCategorias') // URL de la API
+    fetch('http://localhost:8081/api/categorias/obtenerCategorias')
         .then(response => { 
             if (!response.ok) {
                 throw new Error('Error al obtener las categorías');
@@ -11,9 +11,22 @@ document.getElementById('cargarDatos').addEventListener('click', () => {
             lista.innerHTML = ''; // Limpia la lista antes de agregar nuevos elementos
             
             data.forEach(categoria => {
-                let li = document.createElement('li');
-                li.textContent = categoria.nombre; // Suponiendo que la entidad tiene un atributo "nombre"
-                lista.appendChild(li);
+                let liCategoria = document.createElement('li');
+                liCategoria.textContent = categoria.nombre;
+                
+                // Crear una lista para los productos dentro de la categoría
+                let ulProductos = document.createElement('ul');
+                
+                // Agregar los productos de la categoría
+                categoria.productos.forEach(producto => {
+                    let liProducto = document.createElement('li');
+                    liProducto.textContent = `📦 ${producto.nombre} - 💲${producto.precio}`;
+                    ulProductos.appendChild(liProducto);
+                });
+
+                // Agregar la lista de productos debajo de la categoría
+                liCategoria.appendChild(ulProductos);
+                lista.appendChild(liCategoria);
             });
         })
         .catch(error => console.error('Error:', error));
