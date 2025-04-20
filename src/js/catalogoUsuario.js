@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupProductHoverEffects();
     
     // Details button click
-    setupDetailsButtons(grupos);
+    setupDetailsButtons();
     
     // Mobile menu toggle
     setupMobileMenu();
@@ -178,7 +178,7 @@ function updateSectionWithFeaturedProducts(section, categoria) {
         // Determinar el título de la sección según el índice
         let tituloSeccion = '';
         if (index === 0) {
-            tituloSeccion = `Lo más destacado en ${categoria.nombre}`;
+            tituloSeccion = ``;
         } else if (index === 1) {
             tituloSeccion = `Ofertas en ${categoria.nombre}`;
         } else {
@@ -194,7 +194,7 @@ function updateSectionWithFeaturedProducts(section, categoria) {
         sectionHeader.className = 'section-header';
         sectionHeader.innerHTML = `
             <h2>${tituloSeccion}</h2>
-            <a href="#" class="view-all">Ver Todo »</a>
+            
         `;
         
         // Crear la cuadrícula de productos
@@ -234,6 +234,13 @@ function generateProductsHTML(productos) {
             ? producto.fotos[0].url 
             : '/placeholder.svg?height=200&width=150';
         
+        // Formatear el precio con separadores de miles
+        const precioFormateado = new Intl.NumberFormat('es-HN', {
+            style: 'currency',
+            currency: 'HNL',
+            minimumFractionDigits: 0
+        }).format(producto.precio).replace('HNL', 'L.');
+        
         // Generar información adicional del producto
         let infoAdicional = '';
         if (producto.almacenamiento && producto.almacenamiento.tamanioalmacenamiento) {
@@ -243,19 +250,32 @@ function generateProductsHTML(productos) {
             infoAdicional += `| ${producto.color.nombre}`;
         }
         
+        // Determinar si el producto está en oferta (ejemplo: 20% de probabilidad)
+        const enOferta = Math.random() < 0.2;
+        const precioOriginal = enOferta ? 
+            new Intl.NumberFormat('es-HN', {
+                style: 'currency',
+                currency: 'HNL',
+                minimumFractionDigits: 0
+            }).format(producto.precio * 1.2).replace('HNL', 'L.') : '';
+        
         return `
             <div class="product-card" data-id="${producto.idproducto}">
                 <div class="product-image">
                     <img src="${fotoUrl}" alt="${producto.nombre}">
+                    ${enOferta ? '<span class="discount-badge">-20%</span>' : ''}
                 </div>
                 <h3>${producto.nombre}</h3>
                 ${infoAdicional ? `<p class="product-info">${infoAdicional}</p>` : ''}
+                <p class="price">
+                    ${enOferta ? `<span class="original-price">${precioOriginal}</span>` : ''}
+                    Precio: <span>${precioFormateado}</span>
+                </p>
                 <a href="/src/view/detalleProducto.html?id=${producto.idproducto}" class="details-btn" data-id="${producto.idproducto}">Ver más detalles</a>
             </div>
         `;
     }).join('');
 }
-
 
 // Función para actualizar los productos destacados en la página de inicio
 function updateFeaturedProducts(categorias) {
@@ -383,15 +403,20 @@ function setupProductHoverEffects() {
 }
 
 // Función para configurar los botones de detalles
-function setupDetailsButtons(productos) {
+function setupDetailsButtons() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('details-btn')) {
-            e.preventDefault();
-            window.location.href = '/src/view/detalleProducto.html?id=${producto.idproducto}';
+            // No necesitamos prevenir el comportamiento predeterminado
+            // ya que ahora el enlace tiene una URL válida que redirige a la página de detalle
+            
+            // Si quieres hacer algo adicional antes de la redirección, puedes hacerlo aquí
+            const productId = e.target.getAttribute('data-id');
+            console.log(`Redirigiendo a la página de detalle del producto ${productId}`);
+            
+            // La redirección ocurrirá automáticamente por el href del enlace
         }
     });
 }
-
 
 // Función para configurar el menú móvil
 function setupMobileMenu() {

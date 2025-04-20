@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Probar Producto por ID</title>
+</head>
+<body>
+  <h2>Probar obtención de producto por ID</h2>
+
+  <label for="productId">ID del producto:</label>
+  <input type="number" id="productId" value="3">
+  <button onclick="probarProducto()">Ver Producto</button>
+
+  <pre id="respuesta"></pre>
+
+  <script>
+    function probarProducto() {
+      const id = document.getElementById('productId').value;
+
+      // Asegúrate de que el parámetro coincide con 'idproducto'
+      fetch(`http://localhost:8081/api/productos/productosXid?idproducto=${id}`, {
+        method: 'GET'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById('respuesta').textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        document.getElementById('respuesta').textContent = "Fallo en la petición: " + error.message;
+      });
+    }
+  </script>
+</body>
+</html>

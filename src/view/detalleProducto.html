@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swapping - Detalle de Producto</title>
+    <link rel="stylesheet" href="/src/styles/detalleProducto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="left-section">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/src/view/landing.html" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <select class="category-select">
+                        <option value="">Categoría</option>
+                        <option value="celulares">Celulares</option>
+                        <option value="computadoras">Computadoras</option>
+                        <option value="tablets">Tablets</option>
+                        <option value="relojes">Relojes</option>
+                    </select>
+                    <input type="text" placeholder="Search Product Here">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <a href="/src/view/registro.html" class="register-link">Registrarse</a>
+                <a href="/src/view/login.html" class="login-btn">Iniciar Sesión</a>
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/src/view/landing.html" data-category="inicio">Inicio</a></li>
+            <li><a href="#" data-category="telefonos-section">Celulares</a></li>
+            <li><a href="#" data-category="computadoras-section">Computadoras <span class="new-badge">NEW</span></a></li>
+            <li><a href="#" data-category="tablets-section">Tablets</a></li>
+            <li><a href="#" data-category="relojes-section">Relojes</a></li>
+            <li><a href="#" data-category="mas">Más</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="product-detail-content">
+        <div class="product-container">
+            <!-- Seller Info -->
+            <div class="seller-info">
+                <div class="seller-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Vendedor" class="seller-avatar">
+                    <div class="seller-details">
+                        <h2 class="seller-name">Alice</h2>
+                        <div class="seller-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="seller-stats">
+                    <div class="stat">
+                        <span class="stat-label">Desde:</span>
+                        <span class="stat-value">1/2/2022</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Vendidos:</span>
+                        <span class="stat-value">58</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Gallery and Info -->
+            <div class="product-detail-main">
+                <div class="product-gallery">
+                    <div class="gallery-main">
+                        <img src="/placeholder.svg" alt="Producto" id="mainProductImage">
+                    </div>
+                    <div class="gallery-thumbnails" id="galleryThumbnails">
+                        <!-- Thumbnails will be added dynamically -->
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h1 class="product-title" id="productTitle">Cargando...</h1>
+                    <div class="product-price" id="productPrice">L0</div>
+                    
+                    <div class="product-description">
+                        <h3>Descripción breve del producto</h3>
+                        <p id="productDescription">Cargando descripción...</p>
+                    </div>
+                    
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Marca:</span>
+                            <span class="spec-value" id="productBrand">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Modelo:</span>
+                            <span class="spec-value" id="productModel">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Color:</span>
+                            <span class="spec-value" id="productColor">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Almacenamiento:</span>
+                            <span class="spec-value" id="productStorage">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Stock:</span>
+                            <span class="spec-value" id="productStock">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Estado:</span>
+                            <span class="spec-value" id="productCondition">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <button class="buy-now-btn">Comprar ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h2>Comentarios</h2>
+                <div class="comments-list">
+                    <div class="comment-item">
+                        <div class="comment-user">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem" class="comment-avatar">
+                            <div class="comment-user-info">
+                                <div class="comment-username">
+                                    <span class="username-highlight">Ahmed Salem</span> had won the negotiation of this ad item
+                                </div>
+                                <div class="comment-user-details">Ahmed Salem</div>
+                                <div class="comment-timestamp">1:00 PM, 30 May 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-user">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem" class="comment-avatar">
+                            <div class="comment-user-info">
+                                <div class="comment-username">
+                                    <span class="username-highlight">Ahmed Salem</span> Added agreed price (L15,000)
+                                </div>
+                                <div class="comment-user-details">Ahmed Salem</div>
+                                <div class="comment-timestamp">3:30 PM, 30 May 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-user">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Mostafa Khalid" class="comment-avatar">
+                            <div class="comment-user-info">
+                                <div class="comment-username">
+                                    <span class="username-highlight">Ad Owner</span> Added agreed price (L11,000)
+                                </div>
+                                <div class="comment-user-details">Mostafa Khalid</div>
+                                <div class="comment-timestamp">3:33 PM, 30 May 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <a href="#" class="logo">
+                        <span class="logo-text">SWAPPING</span>
+                        <div class="logo-icon">
+                            <div class="arrow-left"></div>
+                            <div class="arrow-right"></div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Inicio</a>
+                    <a href="#">Productos <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Blog</a>
+                    <a href="#">Ayuda</a>
+                    <a href="#">Acerca de</a>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>Grupo Axelite 2024</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/detalleProducto.js"></script>
+</body>
+</html>

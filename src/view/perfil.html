@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swapping - Perfil de Usuario</title>
+    <link rel="stylesheet" href="/src/styles/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="left-section">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/src/view/landing.html" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <select class="category-select">
+                        <option value="">Categoría</option>
+                        <option value="celulares">Celulares</option>
+                        <option value="computadoras">Computadoras</option>
+                        <option value="tablets">Tablets</option>
+                        <option value="relojes">Relojes</option>
+                    </select>
+                    <input type="text" placeholder="Search Product Here">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <a href="/src/view/registro.html" class="register-link">Registrarse</a>
+                <a href="/src/view/login.html" class="login-btn">Iniciar Sesión</a>
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/src/view/catalogoUsuario.html" data-category="inicio">Inicio</a></li>
+            <li><a href="#" data-category="telefonos-section">Celulares</a></li>
+            <li><a href="#" data-category="computadoras-section">Computadoras <span class="new-badge">NEW</span></a></li>
+            <li><a href="#" data-category="tablets-section">Tablets</a></li>
+            <li><a href="#" data-category="relojes-section">Relojes</a></li>
+            <li><a href="#" data-category="mas">Más</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="profile-content">
+        <div class="profile-container">
+            <!-- Left Column - User Info -->
+            <div class="profile-left-column">
+                <!-- User Profile Card -->
+                <div class="profile-card">
+                    <h2>Información Del Perfil</h2>
+                    <div class="profile-image">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Mohammed Kamel Torres">
+                        <button class="edit-profile-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                    </div>
+                    <h3 class="profile-name">Mohammed Kamel Torres</h3>
+                    <div class="profile-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="rating-count">(23)</span>
+                    </div>
+                    <p class="member-since">Miembro desde 2021</p>
+                </div>
+
+                <!-- Contact Info Card -->
+                <div class="profile-card">
+                    <h2>Información De Contacto</h2>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope" style="color: #e74c3c;"></i>
+                            <span>moh@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                            <span>+966 55 123 1234</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i>
+                            <span>Saudi Arabia</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Certification Card -->
+                <div class="profile-card">
+                    <h2>Certificado Por</h2>
+                    <div class="certification-item">
+                        <div class="certifier-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
+                            <div>
+                                <p class="certifier-name">Ahmed Salem</p>
+                                <p class="certifier-level">Excelente</p>
+                            </div>
+                        </div>
+                        <div class="certifier-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="certification-item">
+                        <div class="certifier-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
+                            <div>
+                                <p class="certifier-name">Ahmed Salem</p>
+                                <p class="certifier-level">Malo</p>
+                            </div>
+                        </div>
+                        <div class="certifier-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="certification-item">
+                        <div class="certifier-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
+                            <div>
+                                <p class="certifier-name">Ahmed Salem</p>
+                                <p class="certifier-level">Regular</p>
+                            </div>
+                        </div>
+                        <div class="certifier-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - About and Products -->
+            <div class="profile-right-column">
+                <!-- About Me Section -->
+                <div class="about-section">
+                    <h2>Acerca De Mí</h2>
+                    <p>
+                        Recently, I had traveled to my parents for a quiet weekend at home. It was warm, sunny, and I was studying for upcoming interviews. I already had a dedicated notebook full of details from company websites, job postings, online presentations, recruiter YouTube videos about navigating the corporate interview process and I had even looked at what kinds some of these companies offered that I could familiarize myself with should it come up in conversation.
+                    </p>
+                </div>
+
+                <!-- Products Section -->
+                <div class="products-section">
+                    <h2>Productos disponibles</h2>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/2202/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezkltpa-530969646?$650_519_PNG$" alt="Galaxy S22 Ultra">
+                            </div>
+                            <h3>Galaxy S22 Ultra</h3>
+                            <p class="price">Precio: <span>L 15,420</span></p>
+                            <a href="#" class="buy-btn">Comprar</a>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/2202/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezkltpa-530969646?$650_519_PNG$" alt="Galaxy S22 Ultra">
+                            </div>
+                            <h3>Galaxy S22 Ultra</h3>
+                            <p class="price">Precio: <span>L 15,420</span></p>
+                            <a href="#" class="buy-btn">Comprar</a>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/sm-m336bzbltpa/gallery/latin-galaxy-m33-5g-sm-m336-sm-m336bzbltpa-531868834?$650_519_PNG$" alt="Galaxy M33">
+                            </div>
+                            <h3>Galaxy M33 (64GB | 64 GB)</h3>
+                            <p class="price">Precio: <span>L 5,420</span></p>
+                            <a href="#" class="buy-btn">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <a href="#" class="logo">
+                        <span class="logo-text">SWAPPING</span>
+                        <div class="logo-icon">
+                            <div class="arrow-left"></div>
+                            <div class="arrow-right"></div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Inicio</a>
+                    <a href="#">Productos <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Blog</a>
+                    <a href="#">Ayuda</a>
+                    <a href="#">Acerca de</a>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>Grupo Axelite 2024</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/perfil.js"></script>
+</body>
+</html>
