@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch categorías y productos desde la API
     fetchCategorias();
     
+    // Cargar todos los productos para la página de inicio
+    fetchAllProducts();
+    
     // Product hover effect
     setupProductHoverEffects();
     
     // Details button click
-    setupDetailsButtons(grupos);
+    setupDetailsButtons();
     
     // Mobile menu toggle
     setupMobileMenu();
@@ -14,6 +17,58 @@ document.addEventListener('DOMContentLoaded', function() {
     // Slider dots functionality
     setupSliderDots();
 });
+
+// Función para obtener todos los productos para la página de inicio
+async function fetchAllProducts() {
+    try {
+        // Mostrar indicador de carga
+        const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+        if (featuredProductsGrid) {
+            featuredProductsGrid.innerHTML = '<div class="loading-indicator"><i class="fas fa-spinner fa-spin"></i> Cargando productos...</div>';
+        }
+        
+        const response = await fetch('http://localhost:8081/api/productos/obtenerProductos');
+        if (!response.ok) {
+            throw new Error('Error al obtener los productos');
+        }
+        
+        const productos = await response.json();
+        console.log('Productos obtenidos para la página de inicio:', productos);
+        
+        // Actualizar la sección de productos en la página de inicio
+        updateHomePageProducts(productos);
+        
+    } catch (error) {
+        console.error('Error al cargar todos los productos:', error);
+        
+        // Si hay un error, mostrar mensaje de error
+        const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+        if (featuredProductsGrid) {
+            featuredProductsGrid.innerHTML = '<p class="error-message">No se pudieron cargar los productos. Por favor, inténtelo de nuevo más tarde.</p>';
+        }
+    }
+}
+
+// Función para actualizar la sección de productos en la página de inicio
+function updateHomePageProducts(productos) {
+    const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+    if (!featuredProductsGrid) return;
+    
+    // Actualizar el título de la sección si existe
+    const featuredTitle = document.querySelector('.featured-products .section-header h2');
+    if (featuredTitle) {
+        featuredTitle.textContent = 'Todos los productos';
+    }
+    
+    // Si no hay productos, mostrar mensaje
+    if (!productos || productos.length === 0) {
+        featuredProductsGrid.innerHTML = '<p class="empty-message">No hay productos disponibles.</p>';
+        return;
+    }
+    
+    // Generar HTML para todos los productos
+    featuredProductsGrid.innerHTML = generateProductsHTML(productos);
+}
 
 // Función para obtener las categorías y productos desde la API
 async function fetchCategorias() {
@@ -34,9 +89,6 @@ async function fetchCategorias() {
         
         // Crear secciones para cada categoría
         createCategorySections(categorias);
-        
-        // Actualizar la sección de productos destacados en la página de inicio
-        updateFeaturedProducts(categorias);
         
         // Configurar la navegación
         setupNavigation();
@@ -177,13 +229,6 @@ function updateSectionWithFeaturedProducts(section, categoria) {
     grupos.forEach((grupo, index) => {
         // Determinar el título de la sección según el índice
         let tituloSeccion = '';
-        if (index === 0) {
-            tituloSeccion = `Lo más destacado en ${categoria.nombre}`;
-        } else if (index === 1) {
-            tituloSeccion = `Ofertas en ${categoria.nombre}`;
-        } else {
-            tituloSeccion = `Más ${categoria.nombre}`;
-        }
         
         // Crear la sección de productos
         const productSection = document.createElement('section');
@@ -193,8 +238,7 @@ function updateSectionWithFeaturedProducts(section, categoria) {
         const sectionHeader = document.createElement('div');
         sectionHeader.className = 'section-header';
         sectionHeader.innerHTML = `
-            <h2>${tituloSeccion}</h2>
-            <a href="#" class="view-all">Ver Todo »</a>
+            
         `;
         
         // Crear la cuadrícula de productos
@@ -234,6 +278,13 @@ function generateProductsHTML(productos) {
             ? producto.fotos[0].url 
             : '/placeholder.svg?height=200&width=150';
         
+        // Formatear el precio con separadores de miles
+        const precioFormateado = new Intl.NumberFormat('es-HN', {
+            style: 'currency',
+            currency: 'HNL',
+            minimumFractionDigits: 0
+        }).format(producto.precio).replace('HNL', 'L.');
+        
         // Generar información adicional del producto
         let infoAdicional = '';
         if (producto.almacenamiento && producto.almacenamiento.tamanioalmacenamiento) {
@@ -250,40 +301,13 @@ function generateProductsHTML(productos) {
                 </div>
                 <h3>${producto.nombre}</h3>
                 ${infoAdicional ? `<p class="product-info">${infoAdicional}</p>` : ''}
+                <p class="price">
+                    Precio: <span>${precioFormateado}</span>
+                </p>
                 <a href="/src/view/detalleProducto.html?id=${producto.idproducto}" class="details-btn" data-id="${producto.idproducto}">Ver más detalles</a>
             </div>
         `;
     }).join('');
-}
-
-
-// Función para actualizar los productos destacados en la página de inicio
-function updateFeaturedProducts(categorias) {
-    // Buscar la categoría de celulares o usar la primera categoría
-    const celularesCategoria = categorias.find(cat => 
-        cat.nombre.toLowerCase().includes('celular') || 
-        cat.nombre.toLowerCase().includes('móvil') ||
-        cat.nombre.toLowerCase().includes('phone')
-    ) || categorias[0];
-    
-    if (!celularesCategoria) return;
-    
-    const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
-    if (!featuredProductsGrid) return;
-    
-    // Actualizar el título de la sección
-    const featuredTitle = document.querySelector('.featured-products .section-header h2');
-    if (featuredTitle) {
-        featuredTitle.textContent = `Lo más destacado en ${celularesCategoria.nombre}`;
-    }
-    
-    // Ordenar productos por precio (de mayor a menor) para destacar los más caros
-    const productosDestacados = [...celularesCategoria.productos]
-        .sort((a, b) => b.precio - a.precio)
-        .slice(0, 5); // Mostrar los 5 más caros
-    
-    // Mostrar los productos destacados
-    featuredProductsGrid.innerHTML = generateProductsHTML(productosDestacados);
 }
 
 // Función para configurar la navegación
@@ -383,15 +407,20 @@ function setupProductHoverEffects() {
 }
 
 // Función para configurar los botones de detalles
-function setupDetailsButtons(productos) {
+function setupDetailsButtons() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('details-btn')) {
-            e.preventDefault();
-            window.location.href = '/src/view/detalleProducto.html?id=${producto.idproducto}';
+            // No necesitamos prevenir el comportamiento predeterminado
+            // ya que ahora el enlace tiene una URL válida que redirige a la página de detalle
+            
+            // Si quieres hacer algo adicional antes de la redirección, puedes hacerlo aquí
+            const productId = e.target.getAttribute('data-id');
+            console.log(`Redirigiendo a la página de detalle del producto ${productId}`);
+            
+            // La redirección ocurrirá automáticamente por el href del enlace
         }
     });
 }
-
 
 // Función para configurar el menú móvil
 function setupMobileMenu() {
@@ -422,3 +451,35 @@ function setupSliderDots() {
         });
     });
 }
+
+// Añadir estilos para el indicador de carga
+const style = document.createElement('style');
+style.textContent = `
+    .loading-indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        font-size: 16px;
+        color: #666;
+        width: 100%;
+        grid-column: 1 / -1;
+    }
+    
+    .loading-indicator i {
+        margin-right: 10px;
+        color: #0088ff;
+    }
+    
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 20px 0;
+        text-align: center;
+        width: 100%;
+        grid-column: 1 / -1;
+    }
+`;
+document.head.appendChild(style);

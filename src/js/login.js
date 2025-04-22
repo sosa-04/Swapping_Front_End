@@ -20,6 +20,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerBtn = document.querySelector('.btn-secondary');
     let isLoginMode = true;
     
+    // Obtener el formulario y los campos adicionales de registro
+    const loginForm = document.querySelector('.login-form');
+    const registerFields = document.getElementById('register-fields');
+    const roleSelector = document.getElementById('role-selector');
+    const vendorFields = document.getElementById('vendor-fields');
+    
+    // Variables para la foto del DNI
+    let dniPhotoFile = null;
+    let dniPhotoBase64 = null;
+    
+    // Configurar el input de archivo para la foto del DNI
+    const dniPhotoInput = document.getElementById('dniPhoto');
+    const dniPreview = document.getElementById('dniPreview');
+    
+    if (dniPhotoInput) {
+        dniPhotoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            dniPhotoFile = file;
+            
+            // Mostrar vista previa
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                dniPhotoBase64 = event.target.result;
+                dniPreview.innerHTML = `
+                    <img src="${dniPhotoBase64}" alt="Vista previa del DNI">
+                    <span>${file.name}</span>
+                `;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    
     if (loginBtn && registerBtn) {
         loginBtn.addEventListener('click', function() {
             loginBtn.classList.add('active');
@@ -27,6 +61,16 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.welcome-title').textContent = 'Bienvenido a Swapping';
             document.querySelector('.login-description').textContent = 'Inicia sesión para comprar y vender productos electrónicos';
             document.querySelector('.login-submit-btn').textContent = 'Iniciar Sesión';
+            
+            // Ocultar campos de registro
+            if (registerFields) registerFields.style.display = 'none';
+            if (roleSelector) roleSelector.style.display = 'none';
+            if (vendorFields) vendorFields.style.display = 'none';
+            
+            // Mostrar opciones de recordar y olvidar contraseña
+            const formOptions = document.querySelector('.form-options');
+            if (formOptions) formOptions.style.display = 'flex';
+            
             isLoginMode = true;
         });
         
@@ -36,13 +80,35 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.welcome-title').textContent = 'Crear una cuenta';
             document.querySelector('.login-description').textContent = 'Regístrate para comprar y vender productos electrónicos';
             document.querySelector('.login-submit-btn').textContent = 'Registrarse';
+            
+            // Mostrar campos de registro
+            if (registerFields) registerFields.style.display = 'block';
+            if (roleSelector) roleSelector.style.display = 'block';
+            
+            // Verificar si se debe mostrar los campos de vendedor
+            if (roleSelector && vendorFields) {
+                const selectedRole = document.querySelector('input[name="role"]:checked').value;
+                vendorFields.style.display = selectedRole === 'vendor' ? 'block' : 'none';
+            }
+            
+            // Ocultar opciones de recordar y olvidar contraseña
+            const formOptions = document.querySelector('.form-options');
+            if (formOptions) formOptions.style.display = 'none';
+            
             isLoginMode = false;
         });
     }
     
-    // Form submission
-    const loginForm = document.querySelector('.login-form');
+    // Manejar cambio de rol
+    if (roleSelector) {
+        roleSelector.addEventListener('change', function(e) {
+            if (e.target.name === 'role' && vendorFields) {
+                vendorFields.style.display = e.target.value === 'vendor' ? 'block' : 'none';
+            }
+        });
+    }
     
+    // Form submission
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -50,9 +116,37 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            if (!email || !password) {
-                showMessage('Por favor, complete todos los campos', 'error');
-                return;
+            if (isLoginMode) {
+                // Validación para inicio de sesión
+                if (!email || !password) {
+                    showMessage('Por favor, complete todos los campos', 'error');
+                    return;
+                }
+            } else {
+                // Validación para registro
+                const firstName = document.getElementById('firstName')?.value;
+                const lastName = document.getElementById('lastName')?.value;
+                const phone = document.getElementById('phone')?.value;
+                const confirmPassword = document.getElementById('confirmPassword')?.value;
+                const role = document.querySelector('input[name="role"]:checked')?.value;
+                
+                if (!email || !password || !firstName || !lastName || !phone || !confirmPassword || !role) {
+                    showMessage('Por favor, complete todos los campos obligatorios', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage('Las contraseñas no coinciden', 'error');
+                    return;
+                }
+                
+                // Validación adicional para vendedores
+                if (role === 'vendor') {
+                    if (!dniPhotoBase64) {
+                        showMessage('Por favor, suba una foto de su DNI', 'error');
+                        return;
+                    }
+                }
             }
             
             // Deshabilitar el botón de envío para evitar múltiples envíos
@@ -65,8 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Iniciar sesión
                     await iniciarSesion(email, password);
                 } else {
-                    // Registrar usuario (esta función se implementaría según la API disponible)
-                    showMessage('La funcionalidad de registro aún no está implementada', 'warning');
+                    // Registrar usuario según el rol seleccionado
+                    const role = document.querySelector('input[name="role"]:checked').value;
+                    await registrarUsuario(role);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -90,13 +185,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ correo, contrasena })
             });
             
+            // Verificar si la respuesta es exitosa
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.mensaje || 'Error al iniciar sesión');
+                // Intentar obtener el mensaje de error del servidor
+                let errorMessage = 'Error al iniciar sesión';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.mensaje || errorMessage;
+                } catch (jsonError) {
+                    // Si no se puede analizar como JSON, usar el texto de la respuesta
+                    errorMessage = await response.text() || errorMessage;
+                }
+                throw new Error(errorMessage);
             }
             
-            // Obtener los datos del usuario
-            const userData = await response.json();
+            // Intentar analizar la respuesta como JSON
+            let userData;
+            try {
+                userData = await response.json();
+                console.log('Datos del usuario:', userData);
+            } catch (jsonError) {
+                console.error('Error al analizar la respuesta como JSON:', jsonError);
+                throw new Error('Contraseña o correo equivocado');
+            }
             
             // Guardar token si existe
             if (userData.token) {
@@ -106,18 +217,148 @@ document.addEventListener('DOMContentLoaded', function() {
             // Guardar la información completa del usuario
             localStorage.setItem('usuario', JSON.stringify(userData));
             
-            // Verificar si se guardó correctamente
-            console.log('Usuario guardado:', JSON.parse(localStorage.getItem('usuario')));
-            
             showMessage('Inicio de sesión exitoso', 'success');
             
-            // Redireccionar a la página principal después de un breve retraso
+            // Determinar la página de redirección según el rol del usuario
+            let redirectUrl = '/src/view/catalogoUsuario.html'; // Por defecto para usuarios normales
+            
+            // Verificar si el usuario es un vendedor (asumiendo que el ID de rol para vendedor es 2)
+            if (userData.roles && userData.roles.idrol === 2) {
+                redirectUrl = '/src/view/perfilVendedor.html'; // Redirección para vendedores
+            }
+            
+            console.log('Redirigiendo a:', redirectUrl);
+            
+            // Redireccionar a la página correspondiente después de un breve retraso
             setTimeout(() => {
-                window.location.href = '/src/view/catalogoUsuario.html';
+                window.location.href = redirectUrl;
             }, 1000);
             
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
+            throw error;
+        }
+    }
+    
+    // Función para registrar usuario
+    async function registrarUsuario(role) {
+        try {
+            // Obtener datos comunes
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const secondName = document.getElementById('secondName')?.value || '';
+            const secondLastName = document.getElementById('secondLastName')?.value || '';
+            const description = document.getElementById('description')?.value || '';
+            
+            // Crear objeto base de usuario
+            const userData = {
+                email: email,
+                password: password,
+                primernombre: firstName,
+                segundonombre: secondName,
+                primerapellido: lastName,
+                segundoapellido: secondLastName,
+                telefono: phone,
+                descripcion: description,
+                statususuario: 1, // Activo por defecto
+                usuarioreportado: 0,
+                calificacion: 0
+            };
+            
+            // Configurar el rol según el tipo de usuario
+            if (role === 'vendor') {
+                // Para vendedores, usar idVendedor: 2
+                userData.idVendedor = 2;
+                userData.roles = {
+                    idrol: 2,
+                    nombrerol: 'VENDEDOR'
+                };
+            } else {
+                // Para usuarios normales, usar idRol: 1
+                userData.idRol = 1;
+                userData.roles = {
+                    idrol: 1,
+                    nombrerol: 'USUARIO'
+                };
+            }
+            
+            // Añadir foto del DNI para vendedores
+            if (role === 'vendor' && dniPhotoBase64) {
+                userData.fotodni = {
+                    idfotosdni: 0, // El ID será asignado por el servidor
+                    url: dniPhotoBase64
+                };
+            }
+            
+            // Determinar la URL según el rol
+            const apiUrl = role === 'vendor' 
+                ? 'http://localhost:8081/api/usuarios/crearVendedor' 
+                : 'http://localhost:8081/api/usuarios/crearUsuario';
+            
+            console.log(`Registrando ${role === 'vendor' ? 'vendedor' : 'usuario'} con datos:`, userData);
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+            
+            // Verificar si la respuesta es exitosa
+            if (!response.ok) {
+                // Intentar obtener el mensaje de error del servidor
+                let errorMessage = `Error al registrar ${role === 'vendor' ? 'vendedor' : 'usuario'}`;
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.mensaje || errorMessage;
+                } catch (jsonError) {
+                    // Si no se puede analizar como JSON, usar el texto de la respuesta
+                    errorMessage = await response.text() || errorMessage;
+                }
+                throw new Error(errorMessage);
+            }
+            
+            // Intentar analizar la respuesta como JSON
+            let responseData;
+            try {
+                responseData = await response.json();
+                console.log('Respuesta del servidor:', responseData);
+            } catch (jsonError) {
+                console.error('Error al analizar la respuesta como JSON:', jsonError);
+                // Si no podemos analizar la respuesta como JSON pero la operación fue exitosa,
+                // continuamos con el flujo normal
+            }
+            
+            showMessage(`Registro de ${role === 'vendor' ? 'vendedor' : 'usuario'} exitoso`, 'success');
+            
+            // Redireccionar a la página de inicio de sesión después de un breve retraso
+            setTimeout(() => {
+                // Cambiar a modo de inicio de sesión
+                if (loginBtn) loginBtn.click();
+                
+                // Limpiar el formulario
+                loginForm.reset();
+                
+                // Limpiar la vista previa del DNI
+                if (dniPreview) {
+                    dniPreview.innerHTML = `
+                        <i class="fas fa-id-card"></i>
+                        <span>Ningún archivo seleccionado</span>
+                    `;
+                }
+                
+                dniPhotoFile = null;
+                dniPhotoBase64 = null;
+                
+                showMessage('Por favor, inicie sesión con sus nuevas credenciales', 'info');
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Error al registrar usuario:', error);
             throw error;
         }
     }

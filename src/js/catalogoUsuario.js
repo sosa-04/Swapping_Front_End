@@ -31,6 +31,7 @@ async function fetchCategorias() {
         
         // Actualizar la navegación con las categorías de la API
         updateNavigationWithCategories(categorias);
+        fetchAllProducts();
         
         // Crear secciones para cada categoría
         createCategorySections(categorias);
@@ -50,6 +51,57 @@ async function fetchCategorias() {
         console.log('Mostrando productos de ejemplo');
     }
 }
+
+// Función para obtener todos los productos para la página de inicio
+async function fetchAllProducts() {
+    try {
+        // Mostrar indicador de carga
+        const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+        if (featuredProductsGrid) {
+            featuredProductsGrid.innerHTML = '<div class="loading-indicator"><i class="fas fa-spinner fa-spin"></i> Cargando productos...</div>';
+        }
+        
+        const response = await fetch('http://localhost:8081/api/productos/obtenerProductos');
+        if (!response.ok) {
+            throw new Error('Error al obtener los productos');
+        }
+        
+        const productos = await response.json();
+        console.log('Productos obtenidos para la página de inicio:', productos);
+        
+        // Actualizar la sección de productos en la página de inicio
+        updateHomePageProducts(productos);
+        
+    } catch (error) {
+        console.error('Error al cargar todos los productos:', error);
+        
+        // Si hay un error, mostrar mensaje de error
+        const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+        if (featuredProductsGrid) {
+            featuredProductsGrid.innerHTML = '<p class="error-message">No se pudieron cargar los productos. Por favor, inténtelo de nuevo más tarde.</p>';
+        }
+    }
+}
+
+// Función para actualizar la sección de productos en la página de inicio
+function updateHomePageProducts(productos) {
+    const featuredProductsGrid = document.querySelector('.featured-products .product-grid');
+    if (!featuredProductsGrid) return;
+    
+    // Actualizar el título de la sección si existe
+    const featuredTitle = document.querySelector('.featured-products .section-header h2');
+    
+    
+    // Si no hay productos, mostrar mensaje
+    if (!productos || productos.length === 0) {
+        featuredProductsGrid.innerHTML = '<p class="empty-message">No hay productos disponibles.</p>';
+        return;
+    }
+    
+    // Generar HTML para todos los productos
+    featuredProductsGrid.innerHTML = generateProductsHTML(productos);
+}
+
 
 // Función para llenar el select de categorías
 function populateCategorySelect(categorias) {
@@ -293,9 +345,7 @@ function updateFeaturedProducts(categorias) {
     
     // Actualizar el título de la sección
     const featuredTitle = document.querySelector('.featured-products .section-header h2');
-    if (featuredTitle) {
-        featuredTitle.textContent = `Lo más destacado en ${celularesCategoria.nombre}`;
-    }
+    
     
     // Ordenar productos por precio (de mayor a menor) para destacar los más caros
     const productosDestacados = [...celularesCategoria.productos]

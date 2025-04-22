@@ -619,3 +619,192 @@ footer {
     background-color: #cccccc;
     cursor: not-allowed;
 }
+
+/* Estilos para los campos de registro y selección de roles */
+#register-fields {
+    margin-top: 15px;
+}
+
+.role-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.role-option {
+    flex: 1;
+    position: relative;
+}
+
+.role-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.role-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.role-option input[type="radio"]:checked + label {
+    border-color: #0088ff;
+    background-color: rgba(0, 136, 255, 0.05);
+    box-shadow: 0 0 0 2px rgba(0, 136, 255, 0.2);
+}
+
+.role-option label i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #0088ff;
+}
+
+.role-option label span {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.role-description {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin: 5px 0 0;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* Estilos para la carga de archivos */
+.file-upload-container {
+    margin-top: 5px;
+}
+
+.file-upload-preview {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px dashed #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    min-height: 60px;
+}
+
+.file-upload-preview i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #666;
+}
+
+.file-upload-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.file-upload-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #0088ff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file-upload-btn:hover {
+    background-color: #0077e6;
+}
+
+.file-upload-btn i {
+    margin-right: 8px;
+}
+
+.file-help-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Estilos para los mensajes */
+.message-container {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    animation: fadeIn 0.3s ease;
+}
+
+.message-container.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.message-container.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.message-container.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+.message-container.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+}
+
+.message-content {
+    display: flex;
+    align-items: center;
+}
+
+.message-content i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.message-container.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilos para campos obligatorios */
+label::after {
+    content: "";
+}
+
+label[for="firstName"]::after,
+label[for="lastName"]::after,
+label[for="confirmPassword"]::after,
+label[for="phone"]::after,
+label[for="dniPhoto"]::after,
+.role-selector label::after {
+    content: " *";
+    color: #dc3545;
+}

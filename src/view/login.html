@@ -24,8 +24,6 @@
                 </a>
             </div>
             
-            
-            
             <div class="right-section">
                 <a href="#" class="register-link">Registrarse</a>
                 <a href="#" class="login-btn">Iniciar Sesión</a>
@@ -60,6 +58,7 @@
                 <p class="login-description">Inicia sesión para comprar y vender productos electrónicos</p>
                 
                 <form class="login-form">
+                    <!-- Campos de inicio de sesión -->
                     <div class="form-group">
                         <label for="email">Correo Electrónico</label>
                         <div class="input-with-icon">
@@ -76,6 +75,104 @@
                             <button type="button" class="toggle-password">
                                 <i class="far fa-eye"></i>
                             </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Campos adicionales para registro (ocultos por defecto) -->
+                    <div id="register-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="firstName">Primer Nombre*</label>
+                            <div class="input-with-icon">
+                                <i class="far fa-user"></i>
+                                <input type="text" id="firstName" placeholder="Ingrese su primer nombre">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="secondName">Segundo Nombre</label>
+                            <div class="input-with-icon">
+                                <i class="far fa-user"></i>
+                                <input type="text" id="secondName" placeholder="Ingrese su segundo nombre (opcional)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Primer Apellido*</label>
+                            <div class="input-with-icon">
+                                <i class="far fa-user"></i>
+                                <input type="text" id="lastName" placeholder="Ingrese su primer apellido">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="secondLastName">Segundo Apellido</label>
+                            <div class="input-with-icon">
+                                <i class="far fa-user"></i>
+                                <input type="text" id="secondLastName" placeholder="Ingrese su segundo apellido (opcional)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Teléfono*</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="phone" placeholder="Ingrese su número de teléfono">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Contraseña*</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirmPassword" placeholder="Confirme su contraseña">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Selector de rol (oculto por defecto) -->
+                    <div id="role-selector" class="form-group" style="display: none;">
+                        <label>Tipo de cuenta*</label>
+                        <div class="role-options">
+                            <div class="role-option">
+                                <input type="radio" id="role-user" name="role" value="user" checked>
+                                <label for="role-user">
+                                    <i class="fas fa-user"></i>
+                                    <span>Usuario</span>
+                                    <p class="role-description">Compra productos en la plataforma</p>
+                                </label>
+                            </div>
+                            <div class="role-option">
+                                <input type="radio" id="role-vendor" name="role" value="vendor">
+                                <label for="role-vendor">
+                                    <i class="fas fa-store"></i>
+                                    <span>Vendedor</span>
+                                    <p class="role-description">Vende y compra productos en la plataforma</p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Campos adicionales para vendedores (ocultos por defecto) -->
+                    <div id="vendor-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea id="description" placeholder="Describa su tienda o los productos que venderá (opcional)"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dniPhoto">Foto de DNI*</label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-preview" id="dniPreview">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>Ningún archivo seleccionado</span>
+                                </div>
+                                <label for="dniPhoto" class="file-upload-btn">
+                                    <i class="fas fa-upload"></i>
+                                    Seleccionar archivo
+                                </label>
+                                <input type="file" id="dniPhoto" accept="image/*" style="display: none;">
+                            </div>
+                            <p class="file-help-text">Sube una foto clara de tu DNI. Este documento es necesario para verificar tu identidad como vendedor.</p>
                         </div>
                     </div>
                     
