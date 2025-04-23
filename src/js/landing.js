@@ -304,7 +304,7 @@ function generateProductsHTML(productos) {
                 <p class="price">
                     Precio: <span>${precioFormateado}</span>
                 </p>
-                <a href="/src/view/detalleProducto.html?id=${producto.idproducto}" class="details-btn" data-id="${producto.idproducto}">Ver más detalles</a>
+                <a href="/src/view/detalleProductoLanding.html?id=${producto.idproducto}" class="details-btn" data-id="${producto.idproducto}">Ver más detalles</a>
             </div>
         `;
     }).join('');

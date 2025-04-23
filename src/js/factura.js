@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backToCatalogBtn.addEventListener('click', function() {
             // Redirigir a la página de catálogo de usuarios con el ID del comprador
             if (idComprador) {
-                window.location.href = `/src/view/catalogoUsuarios.html?idUsuario=${idComprador}`;
+                window.location.href = `/src/view/catalogoUsuario.html?idUsuario=${idComprador}`;
             } else {
                 // Si no hay ID de comprador, redirigir a la página principal
                 window.location.href = '/src/view/landing.html';
