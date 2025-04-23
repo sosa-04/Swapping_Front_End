@@ -3,242 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swapping - Perfil de Usuario</title>
+    <title>SWAPPING - Perfil de Vendedor</title>
     <link rel="stylesheet" href="/src/styles/perfilVendedor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="header-container">
-            <div class="left-section">
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <a href="/src/view/landing.html" class="logo">
-                    <span class="logo-text">SWAPPING</span>
-                    <div class="logo-icon">
-                        <div class="arrow-left"></div>
-                        <div class="arrow-right"></div>
-                    </div>
-                </a>
+        <div class="navbar">
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+                <span>SWAPPING</span>
             </div>
-            
             <div class="search-container">
-                <div class="search-box">
-                    <select class="category-select">
-                        <option value="">Categoría</option>
-                        <option value="celulares">Celulares</option>
-                        <option value="computadoras">Computadoras</option>
-                        <option value="tablets">Tablets</option>
-                        <option value="relojes">Relojes</option>
-                    </select>
-                    <input type="text" placeholder="Search Product Here">
-                    <button class="search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <select class="category-select">
+                    <option>Categoría</option>
+                </select>
+                <input type="text" placeholder="Search Product Here">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
-            
             <div class="user-actions">
-                <a href="/src/view/registro.html" class="register-link">Registrarse</a>
-                <a href="/src/view/login.html" class="login-btn">Iniciar Sesión</a>
-                <a href="#" class="cart-icon">
+                <span class="user-name">Cargando...</span>
+                <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
-                </a>
+                </div>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <ul>
-            <li><a href="/src/view/catalogoUsuario.html" data-category="inicio">Inicio</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="profile-content">
-        <div class="profile-container">
-            <!-- Left Column - User Info -->
-            <div class="profile-left-column">
-                <!-- User Profile Card -->
+    <main>
+        <div class="container">
+            <div class="profile-section">
                 <div class="profile-card">
                     <h2>Información Del Perfil</h2>
                     <div class="profile-image">
-                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Mohammed Kamel Torres">
-                        <button class="edit-profile-btn">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
+                        <img src="https://via.placeholder.com/150" alt="Foto de perfil">
                     </div>
-                    <h3 class="profile-name">Mohammed Kamel Torres</h3>
-                    <div class="profile-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <h3>Cargando...</h3>
+                    <div class="rating">
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
-                        <span class="rating-count">(23)</span>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>(0)</span>
                     </div>
-                    <p class="member-since">Miembro desde 2021</p>
+                    <p>Rol: Vendedor</p>
                 </div>
 
-                <!-- Contact Info Card -->
-                <div class="profile-card">
+                <div class="contact-card">
                     <h2>Información De Contacto</h2>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-envelope" style="color: #e74c3c;"></i>
-                            <span>moh@gmail.com</span>
-                        </li>
-                        <li>
-                            <i class="fab fa-whatsapp" style="color: #25d366;"></i>
-                            <span>+966 55 123 1234</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i>
-                            <span>Saudi Arabia</span>
-                        </li>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> <span id="userEmail">Cargando...</span></li>
+                        <li><i class="fab fa-whatsapp"></i> <span id="userPhone">Cargando...</span></li>
                     </ul>
-                </div>
-
-                <!-- Certification Card -->
-                <div class="profile-card">
-                    <h2>Certificado Por</h2>
-                    <div class="certification-item">
-                        <div class="certifier-info">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
-                            <div>
-                                <p class="certifier-name">Ahmed Salem</p>
-                                <p class="certifier-level">Excelente</p>
-                            </div>
-                        </div>
-                        <div class="certifier-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="certification-item">
-                        <div class="certifier-info">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
-                            <div>
-                                <p class="certifier-name">Ahmed Salem</p>
-                                <p class="certifier-level">Malo</p>
-                            </div>
-                        </div>
-                        <div class="certifier-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="certification-item">
-                        <div class="certifier-info">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Salem">
-                            <div>
-                                <p class="certifier-name">Ahmed Salem</p>
-                                <p class="certifier-level">Regular</p>
-                            </div>
-                        </div>
-                        <div class="certifier-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Right Column - About and Products -->
-            <div class="profile-right-column">
-                <!-- About Me Section -->
-                <div class="about-section">
+            <div class="content-section">
+                <div class="about-card">
                     <h2>Acerca De Mí</h2>
-                    <p>
-                        Recently, I had traveled to my parents for a quiet weekend at home. It was warm, sunny, and I was studying for upcoming interviews. I already had a dedicated notebook full of details from company websites, job postings, online presentations, recruiter YouTube videos about navigating the corporate interview process and I had even looked at what kinds some of these companies offered that I could familiarize myself with should it come up in conversation.
-                    </p>
+                    <p id="userDescription">Cargando...</p>
                 </div>
 
-                <!-- Products Section -->
-                <div class="products-section">
-                    <h2>Productos disponibles</h2>
-                    <div class="product-grid">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/2202/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezkltpa-530969646?$650_519_PNG$" alt="Galaxy S22 Ultra">
-                            </div>
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L 15,420</span></p>
-                            <a href="#" class="buy-btn">Comprar</a>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/2202/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezkltpa-530969646?$650_519_PNG$" alt="Galaxy S22 Ultra">
-                            </div>
-                            <h3>Galaxy S22 Ultra</h3>
-                            <p class="price">Precio: <span>L 15,420</span></p>
-                            <a href="#" class="buy-btn">Comprar</a>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.samsung.com/is/image/samsung/p6pim/latin/sm-m336bzbltpa/gallery/latin-galaxy-m33-5g-sm-m336-sm-m336bzbltpa-531868834?$650_519_PNG$" alt="Galaxy M33">
-                            </div>
-                            <h3>Galaxy M33 (64GB | 64 GB)</h3>
-                            <p class="price">Precio: <span>L 5,420</span></p>
-                            <a href="#" class="buy-btn">Comprar</a>
-                        </div>
+                <div class="products-card">
+                    <div class="products-header">
+                        <h2>Mis Productos</h2>
+                        <button class="create-product-btn" id="createProductBtn">
+                            <i class="fas fa-plus"></i> Crear Producto
+                        </button>
+                    </div>
+                    
+                    <!-- Indicador de carga -->
+                    <div id="loadingIndicator" class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Los productos se cargarán dinámicamente aquí -->
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-logo">
-                    <a href="#" class="logo">
-                        <span class="logo-text">SWAPPING</span>
-                        <div class="logo-icon">
-                            <div class="arrow-left"></div>
-                            <div class="arrow-right"></div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="#">Inicio</a>
-                    <a href="#">Productos <i class="fas fa-chevron-down"></i></a>
-                    <a href="#">Blog</a>
-                    <a href="#">Ayuda</a>
-                    <a href="#">Acerca de</a>
-                </div>
+        <div class="footer-top">
+            <div class="footer-brand">SWAPPING</div>
+            <div class="footer-links">
+                <a href="#">Inicio</a>
+                <a href="#">Productos</a>
+                <a href="#">Blog</a>
+                <a href="#">Ayuda</a>
+                <a href="#">Acerca de</a>
             </div>
-            
-            <div class="footer-divider"></div>
-            
-            <div class="footer-bottom">
-                <p>Grupo Axelite 2024</p>
-                
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Grupo Axelite 2024</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
+
+    <!-- Modal para crear/editar producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">Crear Nuevo Producto</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productPrice">Precio (L)</label>
+                    <input type="number" id="productPrice" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Descripción</label>
+                    <textarea id="productDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Stock</label>
+                    <input type="number" id="productStock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productStorage">Almacenamiento</label>
+                    <select id="productStorage" required>
+                        <option value="">Seleccionar almacenamiento</option>
+                        <!-- Opciones cargadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productColor">Color</label>
+                    <select id="productColor" required>
+                        <option value="">Seleccionar color</option>
+                        <!-- Opciones cargadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productModel">Modelo</label>
+                    <input type="text" id="productModel" required>
+                </div>
+                <div class="form-group">
+                    <label for="productBrand">Marca</label>
+                    <select id="productBrand" required>
+                        <option value="">Seleccionar marca</option>
+                        <!-- Opciones cargadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Categoría</label>
+                    <select id="productCategory" required>
+                        <option value="">Seleccionar categoría</option>
+                        <!-- Opciones cargadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fotos del Producto</label>
+                    <div id="fotosContainer">
+                        <div class="foto-input-container">
+                            <input type="text" class="foto-url" placeholder="URL de la imagen">
+                            <button type="button" class="remove-foto-btn" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <button type="button" id="addFotoBtn">
+                            <i class="fas fa-plus"></i> Añadir otra foto
+                        </button>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="/src/js/perfilVendedor.js"></script>
 </body>
