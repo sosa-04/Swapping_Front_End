@@ -322,7 +322,6 @@ function addToCart(productId) {
     showSuccessMessage('Producto añadido al carrito');
 }
 
-// Function to buy product now
 function buyNow(productId) {
     // Check if user is logged in
     const userInfo = localStorage.getItem('usuario') ? 
@@ -338,11 +337,8 @@ function buyNow(productId) {
         return;
     }
     
-    // Add product to cart
-    addToCart(productId);
-    
-    // Redirect to checkout page
-    window.location.href = '/src/view/checkout.html';
+    // Redirigir a la página de ventas con el ID del producto
+    window.location.href = `/src/view/ventas.html?idProducto=${productId}`;
 }
 
 // Function to update cart count

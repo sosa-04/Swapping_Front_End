@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAPPING - Factura de Compra</title>
+    <link rel="stylesheet" href="/src/styles/factura.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="left-section">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="/src/view/landing.html" class="logo">
+                    <span class="logo-text">SWAPPING</span>
+                    <div class="logo-icon">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="user-actions">
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="factura-content">
+        <div class="factura-container">
+            <div class="factura-header">
+                <h1>Factura de Compra</h1>
+                <p class="success-message"><i class="fas fa-check-circle"></i> ¡Compra realizada con éxito!</p>
+            </div>
+            
+            <div class="factura-details">
+                <div class="factura-info">
+                    <div class="info-row">
+                        <span class="info-label">Número de Factura:</span>
+                        <span class="info-value" id="facturaId">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Fecha de Emisión:</span>
+                        <span class="info-value" id="facturaFecha">-</span>
+                    </div>
+                </div>
+                
+                <div class="factura-parties">
+                    <div class="party-box">
+                        <h3>Vendedor</h3>
+                        <p id="nombreVendedor">-</p>
+                    </div>
+                    <div class="party-box">
+                        <h3>Comprador</h3>
+                        <p id="nombreComprador">-</p>
+                    </div>
+                </div>
+                
+                <div class="factura-product">
+                    <h3>Producto Adquirido</h3>
+                    <div class="product-details">
+                        <div class="product-name" id="nombreProducto">-</div>
+                    </div>
+                </div>
+                
+                <div class="factura-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">L 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>ISV (15%):</span>
+                        <span id="isv">L 0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">L 0.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="factura-actions">
+                <button id="backToCatalogBtn" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Volver al Catálogo
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <a href="#" class="logo">
+                        <span class="logo-text">SWAPPING</span>
+                        <div class="logo-icon">
+                            <div class="arrow-left"></div>
+                            <div class="arrow-right"></div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Inicio</a>
+                    <a href="#">Productos <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Blog</a>
+                    <a href="#">Ayuda</a>
+                    <a href="#">Acerca de</a>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>Grupo Axelite 2024</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/factura.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWAPPING - Crear Venta</title>
+    <title>SWAPPING - Carrito de Compras</title>
     <link rel="stylesheet" href="/src/styles/ventas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -32,6 +32,7 @@
                 <button class="login-btn">Iniciar Sesión</button>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
                 </div>
             </div>
         </div>
@@ -50,58 +51,41 @@
     <main>
         <div class="container">
             <div class="cart-section">
-                <h2>Crear Nueva Venta</h2>
-                <div class="form-container">
-                    <div class="form-group">
-                        <label for="idVendedor">ID Vendedor:</label>
-                        <input type="number" id="idVendedor" min="0" value="0">
+                <h2>Su carrito de compras</h2>
+                <div class="cart-table">
+                    <div class="cart-header">
+                        <div class="header-cell productos">PRODUCTOS</div>
+                        <div class="header-cell precio">PRECIO</div>
+                        <div class="header-cell quantity">QUANTITY</div>
+                        <div class="header-cell subtotal">SUB-TOTAL</div>
                     </div>
-                    <div class="form-group">
-                        <label for="idComprador">ID Comprador:</label>
-                        <input type="number" id="idComprador" min="0" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="idProducto">ID Producto:</label>
-                        <input type="number" id="idProducto" min="0" value="0">
-                    </div>
-                    <div class="buttons">
-                        <button id="backBtn" class="back-btn"><i class="fas fa-arrow-left"></i> REGRESAR</button>
-                        <button id="createSaleBtn" class="update-btn">CREAR VENTA</button>
+                    <div id="cartItems" class="cart-items">
+                        <!-- Los items del carrito se cargarán dinámicamente -->
                     </div>
                 </div>
-
-                <div id="responseContainer" class="response-container" style="display: none;">
-                    <h3>Detalles de la Venta</h3>
-                    <div class="sale-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Comprador:</span>
-                            <span id="nombreComprador" class="detail-value"></span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Vendedor:</span>
-                            <span id="nombreVendedor" class="detail-value"></span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Producto:</span>
-                            <span id="nombreProducto" class="detail-value"></span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Fecha de Emisión:</span>
-                            <span id="fechaEmision" class="detail-value"></span>
-                        </div>
-                    </div>
+                <div class="cart-actions">
+                    <button id="backBtn" class="back-btn"><i class="fas fa-arrow-left"></i> REGRESAR</button>
+                    <button id="updateCartBtn" class="update-btn">ACTUALIZAR CARRITO</button>
                 </div>
             </div>
 
             <div class="summary-section">
                 <div class="summary-container">
-                    <h3>Resumen de la Venta</h3>
+                    <h3>Total del carrito</h3>
                     <div class="summary-row">
                         <span>Subtotal</span>
                         <span id="subtotal">L 0.00</span>
                     </div>
                     <div class="summary-row">
-                        <span>ISV</span>
+                        <span>Shipping</span>
+                        <span id="shipping">Free</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Descuento</span>
+                        <span id="descuento">0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Impuestos</span>
                         <span id="isv">L 0.00</span>
                     </div>
                     <div class="summary-row total">
@@ -146,6 +130,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Campos ocultos para almacenar los IDs -->
+    <input type="hidden" id="idVendedor" value="0">
+    <input type="hidden" id="idComprador" value="0">
+    <input type="hidden" id="idProducto" value="0">
 
     <script src="/src/js/ventas.js"></script>
 </body>
