@@ -356,7 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const producto = await response.json()
   
         // Llenar el formulario con los datos del producto
-        document.getElementById("productName").value = producto.nombre
         document.getElementById("productDescription").value = producto.descripcion
         document.getElementById("productPrice").value = producto.precio
         document.getElementById("productStock").value = producto.stock
@@ -414,9 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showLoading(true)
   
         try {
-          const response = await fetch(`${API_BASE_URL}/api/productos/${idProducto}`, {
-            method: "DELETE",
-          })
+          const response = await fetch(`${API_BASE_URL}/api/productos/eliminarProducto?idProducto=${idProducto}`)
   
           if (!response.ok) {
             // Si hay un error de autenticación, redirigir al login
