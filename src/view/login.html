@@ -80,6 +80,39 @@
                     
                     <!-- Campos adicionales para registro (ocultos por defecto) -->
                     <div id="register-fields" style="display: none;">
+                        <!-- Confirmación de contraseña (movida aquí) -->
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Contraseña*</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirmPassword" placeholder="Confirme su contraseña">
+                            </div>
+                        </div>
+                        
+                        <!-- Foto de perfil (común para ambos tipos de usuario) -->
+                        <div class="form-group">
+                            <label for="profilePhoto">Foto de Perfil</label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-preview" id="profilePreview">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>Ningún archivo seleccionado</span>
+                                </div>
+                                <label for="profilePhoto" class="file-upload-btn">
+                                    <i class="fas fa-upload"></i>
+                                    Seleccionar archivo
+                                </label>
+                                <input type="file" id="profilePhoto" accept="image/*" style="display: none;">
+                            </div>
+                            <p class="file-help-text">Sube una foto para tu perfil (opcional).</p>
+                        </div>
+                        
+                        <!-- Descripción (común para ambos tipos de usuario) -->
+                        <div class="form-group">
+                            <label for="userDescription">Descripción</label>
+                            <textarea id="userDescription" placeholder="Cuéntanos un poco sobre ti (opcional)"></textarea>
+                            <p class="field-help-text">Esta descripción aparecerá en tu perfil público.</p>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="firstName">Primer Nombre*</label>
                             <div class="input-with-icon">
@@ -119,14 +152,6 @@
                                 <input type="tel" id="phone" placeholder="Ingrese su número de teléfono">
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirmar Contraseña*</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" id="confirmPassword" placeholder="Confirme su contraseña">
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- Selector de rol (oculto por defecto) -->
@@ -155,8 +180,9 @@
                     <!-- Campos adicionales para vendedores (ocultos por defecto) -->
                     <div id="vendor-fields" style="display: none;">
                         <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <textarea id="description" placeholder="Describa su tienda o los productos que venderá (opcional)"></textarea>
+                            <label for="vendorDescription">Descripción de Tienda</label>
+                            <textarea id="vendorDescription" placeholder="Describa su tienda o los productos que venderá (opcional)"></textarea>
+                            <p class="field-help-text">Esta descripción aparecerá en su perfil de vendedor.</p>
                         </div>
                         
                         <div class="form-group">
@@ -251,6 +277,8 @@
         </div>
     </footer>
 
-    <script src="/src/js/login.js"></script>
+    <!-- Firebase Scripts -->
+    <script type="module" src="/src/js/firebase-config.js"></script>
+    <script type="module" src="/src/js/login.js"></script>
 </body>
 </html>

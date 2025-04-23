@@ -1,5 +1,10 @@
+// Importar las funciones de Firebase
+import { storage, ref, uploadBytes, getDownloadURL } from './firebase-config.js';
+
+
+// Llamar a esta función al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle password visibility
+        // Toggle password visibility
     const togglePassword = document.querySelector('.toggle-password');
     const passwordInput = document.getElementById('password');
     
@@ -26,9 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const roleSelector = document.getElementById('role-selector');
     const vendorFields = document.getElementById('vendor-fields');
     
-    // Variables para la foto del DNI
+    // Variables para las fotos
     let dniPhotoFile = null;
     let dniPhotoBase64 = null;
+    let profilePhotoFile = null;
+    let profilePhotoBase64 = null;
     
     // Configurar el input de archivo para la foto del DNI
     const dniPhotoInput = document.getElementById('dniPhoto');
@@ -47,6 +54,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 dniPhotoBase64 = event.target.result;
                 dniPreview.innerHTML = `
                     <img src="${dniPhotoBase64}" alt="Vista previa del DNI">
+                    <span>${file.name}</span>
+                `;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    
+    // Configurar el input de archivo para la foto de perfil
+    const profilePhotoInput = document.getElementById('profilePhoto');
+    const profilePreview = document.getElementById('profilePreview');
+    
+    if (profilePhotoInput) {
+        profilePhotoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            profilePhotoFile = file;
+            
+            // Mostrar vista previa
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                profilePhotoBase64 = event.target.result;
+                profilePreview.innerHTML = `
+                    <img src="${profilePhotoBase64}" alt="Vista previa de la foto de perfil" style="border-radius: 50%;">
                     <span>${file.name}</span>
                 `;
             };
@@ -142,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Validación adicional para vendedores
                 if (role === 'vendor') {
-                    if (!dniPhotoBase64) {
+                    if (!dniPhotoFile) {
                         showMessage('Por favor, suba una foto de su DNI', 'error');
                         return;
                     }
@@ -240,6 +271,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Función para subir imagen a Firebase Storage
+    async function subirImagenFirebase(file, folder = 'images') {
+        try {
+            // Crear una referencia única para el archivo
+            const fileName = `${folder}_${Date.now()}_${Math.random().toString(36).substring(2, 15)}.${file.name.split('.').pop()}`;
+            const storageRef = ref(storage, `${folder}/${fileName}`);
+            
+            // Mostrar mensaje de carga
+            showMessage(`Subiendo imagen a Firebase...`, 'info');
+            
+            // Subir el archivo
+            const snapshot = await uploadBytes(storageRef, file);
+            console.log(`Imagen subida a Firebase Storage (${folder}):`, snapshot);
+            
+            // Obtener la URL de descarga
+            const downloadURL = await getDownloadURL(snapshot.ref);
+            console.log('URL de la imagen:', downloadURL);
+            
+            return downloadURL;
+        } catch (error) {
+            console.error('Error al subir la imagen a Firebase:', error);
+            throw new Error('Error al subir la imagen. Por favor, inténtelo de nuevo.');
+        }
+    }
+    
     // Función para registrar usuario
     async function registrarUsuario(role) {
         try {
@@ -251,46 +307,64 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = document.getElementById('phone').value;
             const secondName = document.getElementById('secondName')?.value || '';
             const secondLastName = document.getElementById('secondLastName')?.value || '';
-            const description = document.getElementById('description')?.value || '';
             
-            // Crear objeto base de usuario
+            // Obtener la descripción según el rol
+            let description = '';
+            if (role === 'vendor') {
+                description = document.getElementById('vendorDescription')?.value || '';
+            } else {
+                description = document.getElementById('userDescription')?.value || '';
+            }
+            
+            // Crear objeto base de usuario según el formato JSON esperado
             const userData = {
+                idusuario: 0,
                 email: email,
+                telefono: phone,
                 password: password,
+                descripcion: description,
+                usuarioreportado: 0,
                 primernombre: firstName,
                 segundonombre: secondName,
                 primerapellido: lastName,
                 segundoapellido: secondLastName,
-                telefono: phone,
-                descripcion: description,
+                fotoperfil: "", // Inicialmente vacío, se actualizará si hay foto
                 statususuario: 1, // Activo por defecto
-                usuarioreportado: 0,
-                calificacion: 0
+                calificacion: 0,
+                roles: {
+                    idrol: role === 'vendor' ? 2 : 1,
+                    nombrerol: role === 'vendor' ? 'VENDEDOR' : 'USUARIO'
+                },
+                fotodni: role === 'vendor' ? { idfotosdni: 0, url: "" } : null,
+
             };
             
-            // Configurar el rol según el tipo de usuario
-            if (role === 'vendor') {
-                // Para vendedores, usar idVendedor: 2
-                userData.idVendedor = 2;
-                userData.roles = {
-                    idrol: 2,
-                    nombrerol: 'VENDEDOR'
-                };
-            } else {
-                // Para usuarios normales, usar idRol: 1
-                userData.idRol = 1;
-                userData.roles = {
-                    idrol: 1,
-                    nombrerol: 'USUARIO'
-                };
+            // Si hay una foto de perfil, subirla a Firebase
+            if (profilePhotoFile) {
+                try {
+                    // Subir la imagen a Firebase y obtener la URL
+                    const profileImageUrl = await subirImagenFirebase(profilePhotoFile, 'profiles');
+                    
+                    // Añadir la URL de la foto de perfil al objeto de usuario
+                    userData.fotoperfil = profileImageUrl;
+                } catch (uploadError) {
+                    showMessage('Error al subir la foto de perfil: ' + uploadError.message, 'error');
+                    throw uploadError;
+                }
             }
             
-            // Añadir foto del DNI para vendedores
-            if (role === 'vendor' && dniPhotoBase64) {
-                userData.fotodni = {
-                    idfotosdni: 0, // El ID será asignado por el servidor
-                    url: dniPhotoBase64
-                };
+            // Si hay una imagen de DNI y es un vendedor, subirla a Firebase
+            if (role === 'vendor' && dniPhotoFile) {
+                try {
+                    // Subir la imagen a Firebase y obtener la URL
+                    const dniImageUrl = await subirImagenFirebase(dniPhotoFile, 'dni');
+                    
+                    // Usar la URL en lugar de la imagen base64
+                    userData.fotodni.url = dniImageUrl;
+                } catch (uploadError) {
+                    showMessage('Error al subir la imagen del DNI: ' + uploadError.message, 'error');
+                    throw uploadError;
+                }
             }
             
             // Determinar la URL según el rol
@@ -300,6 +374,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log(`Registrando ${role === 'vendor' ? 'vendedor' : 'usuario'} con datos:`, userData);
             
+            // Añadir logs para depuración
+            console.log('URL de la API:', apiUrl);
+            console.log('Datos enviados (JSON):', JSON.stringify(userData, null, 2));
+            
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -308,16 +386,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(userData)
             });
             
+            // Obtener el texto de la respuesta para depuración
+            const responseText = await response.text();
+            console.log('Respuesta del servidor (texto):', responseText);
+            
             // Verificar si la respuesta es exitosa
             if (!response.ok) {
-                // Intentar obtener el mensaje de error del servidor
                 let errorMessage = `Error al registrar ${role === 'vendor' ? 'vendedor' : 'usuario'}`;
                 try {
-                    const errorData = await response.json();
+                    // Intentar analizar el texto como JSON
+                    const errorData = JSON.parse(responseText);
                     errorMessage = errorData.mensaje || errorMessage;
                 } catch (jsonError) {
                     // Si no se puede analizar como JSON, usar el texto de la respuesta
-                    errorMessage = await response.text() || errorMessage;
+                    errorMessage = responseText || errorMessage;
                 }
                 throw new Error(errorMessage);
             }
@@ -325,8 +407,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Intentar analizar la respuesta como JSON
             let responseData;
             try {
-                responseData = await response.json();
-                console.log('Respuesta del servidor:', responseData);
+                responseData = JSON.parse(responseText);
+                console.log('Respuesta del servidor (JSON):', responseData);
             } catch (jsonError) {
                 console.error('Error al analizar la respuesta como JSON:', jsonError);
                 // Si no podemos analizar la respuesta como JSON pero la operación fue exitosa,
@@ -351,8 +433,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                 }
                 
+                // Limpiar la vista previa de la foto de perfil
+                if (profilePreview) {
+                    profilePreview.innerHTML = `
+                        <i class="fas fa-user-circle"></i>
+                        <span>Ningún archivo seleccionado</span>
+                    `;
+                }
+                
                 dniPhotoFile = null;
                 dniPhotoBase64 = null;
+                profilePhotoFile = null;
+                profilePhotoBase64 = null;
                 
                 showMessage('Por favor, inicie sesión con sus nuevas credenciales', 'info');
             }, 2000);
@@ -425,5 +517,5 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Iniciar sesión con Facebook');
             showMessage('Inicio de sesión con Facebook no disponible en este momento', 'info');
         });
-    }
+    }   
 });
